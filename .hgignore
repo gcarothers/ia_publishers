@@ -1,0 +1,15 @@
+syntax: glob
+*.pyc
+*~
+.svn
+build
+data
+dist
+*.swp
+*.db
+.DS_Store
+*.log
+*.wpr
+./bin
+./lib
+./include
