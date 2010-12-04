@@ -33,12 +33,15 @@ def get_publishers_by_name(publishers):
         publishers_by_name[sortname].add(publisher)
     return publishers_by_name
 
-SORT_RE = re.compile('\W|\WCo\W|Ltd|Inc|Limited|GbR|GmbH|')
+ignore_words = ["publishing", "co", "pub", "inc", "ltd", "company"]
+NON_CHAR = re.compile(r'\W')
 def as_sortname(publisher):
+    """Convert the publisher name in to it's sortable key for grouping."""
     sortname = publisher.name
-    sortname = SORT_RE.sub('', sortname)
     sortname = sortname.lower()
-    sortname = sortname.strip()
+    tokens = NON_CHAR.split(sortname)
+    sortname = "".join(token for token in tokens if token not in ignore_words)
+    sortname = sortname.lower()
     return sortname
         
 def read_publishers_set(publishers_file, sample_size=None):
@@ -90,6 +93,10 @@ def output_rdf(publishers_by_name):
     
 def output_text(publishers_by_name):
     """Output plain text with Publisher tuples in the form:
+    mcgrawhill 3
+        Publisher(prefix=u'007', year=1989, name=u'McGraw-Hill')
+        Publisher(prefix=u'000', year=1991, name=u'McGraw Hill')
+        Publisher(prefix=u'000', year=1986, name=u'McGraw Hill')
     """
     for key in sorted(publishers_by_name):
         pubs = publishers_by_name[key]
