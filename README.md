@@ -1,8 +1,8 @@
-* Publisher Grouping
+# Publisher Grouping
 
 Group publisher tuples by publisher name
 
-** Usage
+## Usage
 
 	Usage: group_publisher.py [options] publisher_tuples
 
@@ -15,7 +15,7 @@ Example Usage:
 
 	python group_publisher.py --format rdf publishers > publishers.rdf
 
-** Requirements
+## Requirements
 
 Requires latest `pymantic` for RDF output. 
 
