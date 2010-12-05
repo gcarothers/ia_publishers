@@ -27,6 +27,7 @@ def main():
     
         
 def get_publishers_by_name(publishers):
+    """Return publishers in a dict indexed by sortname"""
     publishers_by_name = defaultdict(set) # Tons of duplictes
     for publisher in publishers:
         sortname = as_sortname(publisher)
